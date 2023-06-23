@@ -21,7 +21,7 @@ export default function SignUp() {
 		}
 
 		console.log("SignUp Component Successful", result);
-		return router.push("/main");
+		return router.push("/user");
 	};
 
 	return (

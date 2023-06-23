@@ -69,13 +69,13 @@ export default function NavModal() {
 				</AppBar>
 				<List>
 					<ListItem button>
-						<Link href="/main/profile">
+						<Link href="/user/profile">
 							<ListItemText primary="Profile" />
 						</Link>
 					</ListItem>
 					<Divider />
 					<ListItem button>
-						<Link href="/main/quotes">
+						<Link href="/user/quotes">
 							<ListItemText primary="Your Quotes" />
 						</Link>
 					</ListItem>
