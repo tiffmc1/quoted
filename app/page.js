@@ -13,7 +13,7 @@ export default function Home() {
 	return (
 		<>
 			{user ? (
-				router.push("/main")
+				router.push("/user")
 			) : (
 				<div className="h-screen flex flex-col items-center justify-center">
 					<div className="w-[50%] border border-red-500 basis-1/2 flex items-center justify-center">
