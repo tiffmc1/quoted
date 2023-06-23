@@ -1,6 +1,7 @@
 "use client";
 import { useState, forwardRef } from "react";
 import Button from "@mui/material/Button";
+import ListItemButton from "@mui/material/ListItemButton";
 import Dialog from "@mui/material/Dialog";
 import ListItemText from "@mui/material/ListItemText";
 import ListItem from "@mui/material/ListItem";
@@ -11,7 +12,6 @@ import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import Slide from "@mui/material/Slide";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import signout from "../../firebase/auth/signout";
 
@@ -68,26 +68,27 @@ export default function NavModal() {
 					</Toolbar>
 				</AppBar>
 				<List>
-					<ListItem button>
-						<Link href="/user/profile">
+					<ListItem>
+						<ListItemButton href="/user/profile">
 							<ListItemText primary="Profile" />
-						</Link>
+						</ListItemButton>
 					</ListItem>
 					<Divider />
-					<ListItem button>
-						<Link href="/user/quotes">
+					<ListItem>
+						<ListItemButton href="/user/quotes">
 							<ListItemText primary="Your Quotes" />
-						</Link>
+						</ListItemButton>
 					</ListItem>
-
 					<Divider />
-					<ListItem button>
-						<ListItemText primary="Sign Out" />
-						{/* <form>
+					<ListItem>
+						<ListItemButton>
+							<ListItemText primary="Sign Out" />
+							{/* <form>
 				<button type="submit" onSubmit={handleSubmit}>
 					Logout
 				</button>
 			</form> */}
+						</ListItemButton>
 					</ListItem>
 				</List>
 			</Dialog>
