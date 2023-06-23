@@ -2,6 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
+.quotes-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(2rem, 1fr));
+	gap: 2rem;
+	padding: 10px;
+}
+
+.quotes-box {
+	text-align: center;
+	padding: 2rem;
+	box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+	border: 0.1rem solid rgba(0, 0, 0, 0.3);
+}
+
 /* :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
