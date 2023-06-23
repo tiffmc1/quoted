@@ -1,4 +1,3 @@
-"use client";
 import Link from "next/link";
 import SignUp from "../components/Auth/SignUp";
 import OAuth from "../components/Auth/OAuth";
