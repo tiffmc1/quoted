@@ -10,13 +10,11 @@ export default function Home() {
 	const { user } = useAuthContext();
 	const router = useRouter();
 
-	useEffect(() => {
-		if (user) router.push("/main");
-	}, [user, router]);
-
 	return (
 		<>
-			{!user && (
+			{user ? (
+				router.push("/main")
+			) : (
 				<div className="h-screen flex flex-col items-center justify-center">
 					<div className="w-[50%] border border-red-500 basis-1/2 flex items-center justify-center">
 						Quoted Logo Image
