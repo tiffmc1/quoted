@@ -1,18 +1,13 @@
-"use client";
-import React, { useEffect } from "react";
-import { useAuthContext } from "../firebase/context/AuthContext";
-import { useRouter } from "next/navigation";
 import Main from "../components/Main";
+import Nav from "../components/NavBar/Nav";
+import Footer from "../components/Footer";
 
 export default function MainPage() {
-	const { user } = useAuthContext();
-	const router = useRouter();
-
-	useEffect(() => {
-		if (!user) router.push("/");
-	}, [user, router]);
-
 	return (
-		<>{user ? <Main /> : <div>Only logged in uses can view this page</div>}</>
+		<div className="h-screen flex flex-col justify-between">
+			<Nav />
+			<Main />
+			<Footer />
+		</div>
 	);
 }
