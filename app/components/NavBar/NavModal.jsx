@@ -21,20 +21,20 @@ const Transition = forwardRef(function Transition(props, ref) {
 
 export default function NavModal() {
 	const [open, setOpen] = useState(false);
-	// const router = useRouter();
+	const router = useRouter();
 
-	// const handleSubmit = async (event) => {
-	// 	event.preventDefault();
+	const handleSubmit = async (event) => {
+		event.preventDefault();
 
-	// 	const { result, error } = await signout();
+		const { result, error } = await signout();
 
-	// 	if (error) {
-	// 		console.log(error);
-	// 	}
+		if (error) {
+			console.log(error);
+		}
 
-	// 	console.log("Sign Out Successful", result);
-	// 	return router.push("/");
-	// };
+		// console.log("Sign Out Successful", result);
+		return router.push("/");
+	};
 
 	const handleClickOpen = () => {
 		setOpen(true);
@@ -81,13 +81,8 @@ export default function NavModal() {
 					</ListItem>
 					<Divider />
 					<ListItem>
-						<ListItemButton>
+						<ListItemButton type="submit" onClick={handleSubmit}>
 							<ListItemText primary="Sign Out" />
-							{/* <form>
-				<button type="submit" onSubmit={handleSubmit}>
-					Logout
-				</button>
-			</form> */}
 						</ListItemButton>
 					</ListItem>
 				</List>
