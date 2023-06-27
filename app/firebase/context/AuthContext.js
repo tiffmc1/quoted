@@ -1,18 +1,18 @@
 "use client";
 import { createContext, useContext, useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "../config.js";
+import { auth, db } from "@/app/firebase/config";
+import { onSnapshot, collection, query, where } from "firebase/firestore";
 
 const AuthContext = createContext(undefined);
 
 export const AuthContextProvider = ({ children }) => {
 	const [user, setUser] = useState(null);
-	const currUser = auth.currentUser;
 	const value = user;
 
 	useEffect(() => {
 		const unsubscribe = onAuthStateChanged(auth, (user) => {
-			if (currUser) {
+			if (user) {
 				const userQuery = query(
 					collection(db, "users"),
 					where("uid", "==", user.uid)
@@ -27,7 +27,7 @@ export const AuthContextProvider = ({ children }) => {
 		});
 
 		return () => unsubscribe();
-	}, [currUser]);
+	}, []);
 
 	return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
