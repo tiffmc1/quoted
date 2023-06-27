@@ -22,7 +22,7 @@ export default function Login() {
 		}
 
 		console.log("Login Component Successful", result);
-		return router.push("/user");
+		return router.push("/user/main-feed");
 	};
 
 	return (
