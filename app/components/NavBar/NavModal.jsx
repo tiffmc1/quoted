@@ -23,6 +23,14 @@ export default function NavModal() {
 	const [open, setOpen] = useState(false);
 	const router = useRouter();
 
+	const handleClickOpen = () => {
+		setOpen(true);
+	};
+
+	const handleClose = () => {
+		setOpen(false);
+	};
+
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 
@@ -32,16 +40,9 @@ export default function NavModal() {
 			console.log(error);
 		}
 
-		// console.log("Sign Out Successful", result);
-		return router.push("/");
-	};
-
-	const handleClickOpen = () => {
-		setOpen(true);
-	};
-
-	const handleClose = () => {
-		setOpen(false);
+		console.log("Sign Out Successful", result);
+		handleClose();
+		return router.replace("/");
 	};
 
 	return (
