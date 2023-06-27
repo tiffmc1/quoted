@@ -47,13 +47,6 @@ export default function SignUp() {
 					type="password"
 					onChange={(e) => setPassword(e.target.value)}
 				/>
-				{/* <input
-					required
-					name="confirm-password"
-					placeholder="Confirm Password"
-					type="password"
-					onChange={(e) => setConfirmPassword(e.target.value)}
-				/> */}
 				<button
 					type="submit"
 					className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-4"
