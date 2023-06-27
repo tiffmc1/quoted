@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { auth, db } from "@/app/firebase/config";
+import { db } from "@/app/firebase/config";
 import {
 	onSnapshot,
 	collection,
@@ -10,19 +10,27 @@ import {
 	addDoc,
 	serverTimestamp,
 } from "firebase/firestore";
+import { UserData } from "@/app/firebase/context/AuthContext";
+import Moment from "react-moment";
+import moment from "moment/min/moment-with-locales";
+import "moment-timezone";
 
 export default function Quotes() {
-	const user = auth.currentUser;
+	const { user } = UserData();
 	const [userQuotes, setUserQuotes] = useState([]);
 	const [createQuote, setCreateQuote] = useState("");
+	Moment.globalMoment = moment;
+	Moment.globalFormat = "MM/DD/YYYY hh:mm a";
+
+	console.log("quotes page", user);
 
 	useEffect(() => {
-		if (user && user.uid) {
-			let result = onSnapshot(
+		if (user) {
+			onSnapshot(
 				query(
 					collection(db, "quotes"),
-					where("uid", "==", user.uid)
-					// orderBy("created", "desc")
+					where("uid", "==", user.uid),
+					orderBy("created", "desc")
 				),
 				(snapshot) => {
 					setUserQuotes(
@@ -54,13 +62,13 @@ export default function Quotes() {
 	return (
 		<div className="p-4">
 			<div className="quotes-grid">
-				{userQuotes.map((quote) => (
+				{userQuotes?.map((quote) => (
 					<div key={quote.id} className="quotes-box">
 						<div>{/* insert user profile pic */}Profile Pic!</div>
 						<div className="text-center">{quote.quote}</div>
-						<div>{quote.uid}</div>
+						<div>{user?.name}</div>
 						<div>{quote.likes}</div>
-						{/* <div>{quote.created}</div> */}
+						<Moment>{quote.created?.toDate()}</Moment>
 					</div>
 				))}
 			</div>
