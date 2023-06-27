@@ -8,14 +8,13 @@ const AuthContext = createContext(undefined);
 
 export const AuthContextProvider = ({ children }) => {
 	const [user, setUser] = useState(null);
-	const value = user;
 
 	useEffect(() => {
-		const unsubscribe = onAuthStateChanged(auth, (user) => {
-			if (user) {
+		const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+			if (currentUser) {
 				const userQuery = query(
 					collection(db, "users"),
-					where("uid", "==", user.uid)
+					where("uid", "==", currentUser.uid)
 				);
 
 				onSnapshot(userQuery, (snapshot) => {
@@ -29,14 +28,11 @@ export const AuthContextProvider = ({ children }) => {
 		return () => unsubscribe();
 	}, []);
 
-	return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+	return (
+		<AuthContext.Provider value={{ user }}>{children}</AuthContext.Provider>
+	);
 };
 
-export const useUserData = () => {
-	const context = useContext(AuthContext);
-
-	if (context === undefined) {
-		throw new Error("userData must be used within an Auth Context Provider");
-	}
-	return context;
+export const UserData = () => {
+	return useContext(AuthContext);
 };
