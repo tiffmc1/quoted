@@ -16,7 +16,7 @@ export default function Nav() {
 				</div>
 			) : (
 				<div className="flex flex-row justify-between p-4">
-					<Link href="/user">Back</Link>
+					<Link href="/user/main-feed">Home</Link>
 					<NavModal />
 				</div>
 			)}
