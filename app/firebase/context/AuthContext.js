@@ -3,26 +3,55 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../config.js";
 
-export const AuthContext = createContext({});
-export const useAuthContext = () => useContext(AuthContext);
+const AuthContext = createContext(undefined);
 
 export const AuthContextProvider = ({ children }) => {
 	const [user, setUser] = useState(null);
-	const [loading, setLoading] = useState(true);
+	const currUser = auth.currentUser;
+	const value = user;
+
+	// useEffect(() => {
+	// 	if (currUser) {
+	// 		const userQuery = query(
+	// 			collection(db, "users"),
+	// 			where("uid", "==", user.uid)
+	// 		);
+
+	// 		onSnapshot(userQuery, (snapshot) => {
+	// 			snapshot.forEach((doc) => {
+	// 				setUser({ ...doc.data(), id: doc.id });
+	// 			});
+	// 		});
+	// 	}
+	// }, [currUser, user]);
 
 	useEffect(() => {
 		const unsubscribe = onAuthStateChanged(auth, (user) => {
-			if (user) setUser(user);
-			else setUser(null);
-			setLoading(false);
+			if (currUser) {
+				const userQuery = query(
+					collection(db, "users"),
+					where("uid", "==", user.uid)
+				);
+
+				onSnapshot(userQuery, (snapshot) => {
+					snapshot.forEach((doc) => {
+						setUser({ ...doc.data(), id: doc.id });
+					});
+				});
+			}
 		});
 
 		return () => unsubscribe();
-	}, []);
+	}, [currUser]);
 
-	return (
-		<AuthContext.Provider value={{ user }}>
-			{loading ? <div>Loading...</div> : children}
-		</AuthContext.Provider>
-	);
+	return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+};
+
+export const useUserData = () => {
+	const context = useContext(AuthContext);
+
+	if (context === undefined) {
+		throw new Error("userData must be used within an Auth Context Provider");
+	}
+	return context;
 };
