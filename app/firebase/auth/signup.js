@@ -19,6 +19,7 @@ export default async function signUp(userName, email, password) {
 			uid: user,
 			email: email,
 			name: userName,
+			profileImg: "",
 		});
 	} catch (err) {
 		error = err;
