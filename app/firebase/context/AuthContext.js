@@ -10,21 +10,6 @@ export const AuthContextProvider = ({ children }) => {
 	const currUser = auth.currentUser;
 	const value = user;
 
-	// useEffect(() => {
-	// 	if (currUser) {
-	// 		const userQuery = query(
-	// 			collection(db, "users"),
-	// 			where("uid", "==", user.uid)
-	// 		);
-
-	// 		onSnapshot(userQuery, (snapshot) => {
-	// 			snapshot.forEach((doc) => {
-	// 				setUser({ ...doc.data(), id: doc.id });
-	// 			});
-	// 		});
-	// 	}
-	// }, [currUser, user]);
-
 	useEffect(() => {
 		const unsubscribe = onAuthStateChanged(auth, (user) => {
 			if (currUser) {
