@@ -1,13 +1,12 @@
 "use client";
-import React, { useEffect } from "react";
-import { useAuthContext } from "./firebase/context/AuthContext";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import Footer from "./components/Footer";
+import { useUserData } from "./firebase/context/AuthContext";
 
 export default function Home() {
-	const { user } = useAuthContext();
+	const user = useUserData();
 	const router = useRouter();
 
 	return (
