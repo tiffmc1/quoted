@@ -3,7 +3,7 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import errorImg from "../public/images/error.jpg";
+import errorImg from "../../public/images/error.jpg";
 
 const errorReasons = [
 	{

@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { db } from "@/app/firebase/config";
+import { db } from "@/src/app/firebase/config";
 import {
 	collection,
 	orderBy,
@@ -9,14 +9,12 @@ import {
 	where,
 } from "firebase/firestore";
 import Moment from "react-moment";
-import moment from "moment/min/moment-with-locales";
 import "moment-timezone";
 import Image from "next/image";
 import defaultProfileImg from "../../../public/images/profile-img-default.png";
 
 export default function Quotes({ user, path }) {
 	const [quotesList, setQuotesList] = useState([]);
-	Moment.globalMoment = moment;
 	Moment.globalFormat = "MM/DD/YYYY hh:mm a";
 
 	useEffect(() => {
@@ -56,34 +54,42 @@ export default function Quotes({ user, path }) {
 
 	return (
 		<div className="p-4">
-			<div className="quotes-grid">
-				{quotesList.map((quote) => (
-					<div key={quote.id} className="quotes-box">
-						<div>
-							{/* {user ? (
+			{quotesList.length ? (
+				<div className="quotes-grid">
+					{quotesList.map((quote) => (
+						<div key={quote.id} className="quotes-box">
+							<div>
+								{/* {user ? (
 								<Image
 									src={user.profileImg}
 									alt="User profile image"
 									height={100}
 									width={100}
+                  className="border border-gray-500 rounded-full"
 								/>
 							) : ( */}
-							<Image
-								src={defaultProfileImg}
-								alt="User profile image"
-								height={100}
-								width={100}
-							/>
-							{/* )} */}
-						</div>
+								<Image
+									src={defaultProfileImg}
+									alt="User profile image"
+									height={100}
+									width={100}
+									className="border border-gray-500 rounded-full"
+								/>
+								{/* )} */}
+							</div>
 
-						<div className="italic">&quot;{quote.quote}&quot;</div>
-						<div>Author: {user?.name}</div>
-						<Moment>{quote.created?.toDate()}</Moment>
-						<div className="text-right">{quote.likes}</div>
-					</div>
-				))}
-			</div>
+							<div className="italic">&quot;{quote.quote}&quot;</div>
+							<div>Author: {user?.name}</div>
+							<Moment>{quote.created?.toDate()}</Moment>
+							<div className="text-right">{quote.likes}</div>
+						</div>
+					))}
+				</div>
+			) : (
+				<div className="flex items-center justify-center">
+					Looks like you don&apos;t have any quotes yet!
+				</div>
+			)}
 		</div>
 	);
 }

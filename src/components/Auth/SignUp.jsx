@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import signUp from "@/app/firebase/auth/signup";
+import signUp from "@/src/app/firebase/auth/signup";
 
 export default function SignUp() {
 	const [authorName, setAuthorName] = useState("");

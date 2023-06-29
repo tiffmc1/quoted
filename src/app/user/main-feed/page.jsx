@@ -1,6 +1,6 @@
 "use client";
-import { UserData } from "@/app/firebase/context/AuthContext";
-import Quotes from "@/app/components/User/Quotes";
+import { UserData } from "@/src/app/firebase/context/AuthContext";
+import Quotes from "@/src/components/User/Quotes";
 import { usePathname } from "next/navigation";
 
 export default function MainFeedPage() {

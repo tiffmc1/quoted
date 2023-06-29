@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
-import Quotes from "@/app/components/User/Quotes";
-import CreateQuote from "@/app/components/User/CreateQuote";
-import { UserData } from "@/app/firebase/context/AuthContext";
+import Quotes from "@/src/components/User/Quotes";
+import CreateQuote from "@/src/components/User/CreateQuote";
+import { UserData } from "@/src/app/firebase/context/AuthContext";
 import { usePathname } from "next/navigation";
 
 export default function QuotesPage() {

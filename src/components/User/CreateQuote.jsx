@@ -1,22 +1,25 @@
 "use client";
-import { useState } from "react";
-import { db } from "@/app/firebase/config";
+import { useRef } from "react";
+import { db } from "@/src/app/firebase/config";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
 export default function CreateQuote({ user }) {
-	const [createQuote, setCreateQuote] = useState("");
+	const inputRef = useRef();
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
+		const inputQuote = inputRef.current.value;
+
+		if (inputQuote === "") return;
 
 		await addDoc(collection(db, "quotes"), {
 			created: serverTimestamp(),
 			likes: 0,
-			quote: createQuote,
+			quote: inputQuote,
 			uid: user.uid,
 		});
 
-		setCreateQuote("");
+		inputRef.current.value = null;
 	};
 
 	return (
@@ -27,9 +30,9 @@ export default function CreateQuote({ user }) {
 					required
 					type="text"
 					placeholder="Type Your Quote Here"
-					onChange={(e) => setCreateQuote(e.target.value)}
+					ref={inputRef}
 				/>
-				<button type="submit">Create</button>
+				<button onClick={handleSubmit}>Create</button>
 			</form>
 		</div>
 	);
