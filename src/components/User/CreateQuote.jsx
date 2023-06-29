@@ -17,13 +17,14 @@ export default function CreateQuote({ user }) {
 			likes: 0,
 			quote: inputQuote,
 			uid: user.uid,
+			author: user.name,
 		});
 
 		inputRef.current.value = null;
 	};
 
 	return (
-		<div>
+		<div className="flex flex-col items-center justify-center border border-gray-500">
 			<div>Create Quote</div>
 			<form onSubmit={handleSubmit}>
 				<input
@@ -31,6 +32,7 @@ export default function CreateQuote({ user }) {
 					type="text"
 					placeholder="Type Your Quote Here"
 					ref={inputRef}
+					className="border border-gray-500"
 				/>
 				<button onClick={handleSubmit}>Create</button>
 			</form>

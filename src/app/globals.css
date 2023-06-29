@@ -8,13 +8,13 @@
 	padding: 0;
 }
 
-.quotes-grid {
+.quotesGrid {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
 	gap: 2rem;
 }
 
-.quotes-box {
+.quotesBox {
 	text-align: left;
 	padding: 2rem;
 	box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);

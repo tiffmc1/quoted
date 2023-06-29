@@ -1,5 +1,4 @@
 "use client";
-import React from "react";
 import Quotes from "@/src/components/User/Quotes";
 import CreateQuote from "@/src/components/User/CreateQuote";
 import { UserData } from "@/src/app/firebase/context/AuthContext";

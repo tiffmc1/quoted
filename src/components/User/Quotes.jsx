@@ -55,9 +55,9 @@ export default function Quotes({ user, path }) {
 	return (
 		<div className="p-4">
 			{quotesList.length ? (
-				<div className="quotes-grid">
+				<div className="quotesGrid">
 					{quotesList.map((quote) => (
-						<div key={quote.id} className="quotes-box">
+						<div key={quote.id} className="quotesBox">
 							<div>
 								{/* {user ? (
 								<Image
@@ -79,7 +79,7 @@ export default function Quotes({ user, path }) {
 							</div>
 
 							<div className="italic">&quot;{quote.quote}&quot;</div>
-							<div>Author: {user?.name}</div>
+							<div>Author: {quote.author}</div>
 							<Moment>{quote.created?.toDate()}</Moment>
 							<div className="text-right">{quote.likes}</div>
 						</div>
