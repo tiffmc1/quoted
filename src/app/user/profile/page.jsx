@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { UserData } from "@/src/app/firebase/context/AuthContext";
 import { db, storage } from "@/src/app/firebase/config";
@@ -10,13 +10,19 @@ import ImageUpload from "@/src/components/User/ImageUpload";
 export default function ProfilePage() {
 	const { user } = UserData();
 	const [selectedFile, setSelectedFile] = useState("");
+	const [isLoading, setIsLoading] = useState(false);
+	const [uploadComplete, setUploadComplete] = useState(true);
 	const selectFileRef = useRef(null);
 
-	console.log("user", user);
+	useEffect(() => {
+		if (user && user.profileImg) {
+			setSelectedFile(user.profileImg);
+		}
+	}, [user]);
 
 	const uploadProfileImage = async () => {
+		setIsLoading(true);
 		const userRef = doc(db, "users", user.id);
-		console.log("user ref", userRef);
 
 		try {
 			if (selectedFile) {
@@ -35,6 +41,9 @@ export default function ProfilePage() {
 		} catch (error) {
 			console.log("upload image error", error);
 		}
+
+		setIsLoading(false);
+		setUploadComplete(true);
 	};
 
 	const onSelectImage = (event) => {
@@ -49,6 +58,8 @@ export default function ProfilePage() {
 				setSelectedFile(readerEvent.target.result);
 			}
 		};
+
+		setUploadComplete(false);
 	};
 
 	return (
@@ -60,8 +71,12 @@ export default function ProfilePage() {
 						setSelectedFile={setSelectedFile}
 						selectFileRef={selectFileRef}
 						onSelectImage={onSelectImage}
+						uploadProfileImage={uploadProfileImage}
 					/>
-					<button onClick={uploadProfileImage}>Confirm Change</button>
+					{!uploadComplete && (
+						<button onClick={uploadProfileImage}>Confirm Change</button>
+					)}
+					{isLoading && <div>Uploading...</div>}
 				</div>
 				<div className="font-semibold text-2xl pt-6 pb-2">
 					Account Information
