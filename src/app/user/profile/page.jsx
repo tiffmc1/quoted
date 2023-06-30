@@ -1,15 +1,9 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import Link from "next/link";
 import { UserData } from "@/src/app/firebase/context/AuthContext";
-import { auth, db, storage } from "@/src/app/firebase/config";
-import {
-	onSnapshot,
-	collection,
-	query,
-	where,
-	addDoc,
-} from "firebase/firestore";
+import { db, storage } from "@/src/app/firebase/config";
+import { doc, updateDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
 import ImageUpload from "@/src/components/User/ImageUpload";
 
@@ -18,13 +12,11 @@ export default function ProfilePage() {
 	const [selectedFile, setSelectedFile] = useState("");
 	const selectFileRef = useRef(null);
 
-	console.log("profile page", user);
+	console.log("user", user);
 
 	const uploadProfileImage = async () => {
-		const userColRef = collection(db, "users");
-		const userQuery = query(userColRef, where("uid", "==", user.uid));
-
-		const userRef = await addDoc(userColRef, userQuery);
+		const userRef = doc(db, "users", user.id);
+		console.log("user ref", userRef);
 
 		try {
 			if (selectedFile) {
@@ -69,6 +61,7 @@ export default function ProfilePage() {
 						selectFileRef={selectFileRef}
 						onSelectImage={onSelectImage}
 					/>
+					<button onClick={uploadProfileImage}>Confirm Change</button>
 				</div>
 				<div className="font-semibold text-2xl pt-6 pb-2">
 					Account Information
