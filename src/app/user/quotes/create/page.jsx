@@ -1,5 +1,4 @@
 "use client";
-import "../../../globals.css";
 import { useRef } from "react";
 import { db } from "@/src/app/firebase/config";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";

@@ -66,9 +66,6 @@ export default function Quotes({ user, path }) {
 		getUsersList();
 	}, [path, user]);
 
-	console.log("quotes list", quotesList);
-	console.log("users list", usersList);
-
 	return (
 		<div className="p-4">
 			{quotesList.length ? (

@@ -1,5 +1,4 @@
 "use client";
-import React from "react";
 import NavModal from "./NavModal";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
