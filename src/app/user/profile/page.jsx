@@ -61,7 +61,7 @@ export default function ProfilePage() {
 
 	return (
 		<div>
-			<div className="flex flex-col items-center py-2">
+			<div className="flex flex-col items-center justify-around">
 				<div>
 					<ImageUpload
 						selectedFile={selectedFile}
@@ -70,10 +70,16 @@ export default function ProfilePage() {
 						onSelectImage={onSelectImage}
 					/>
 				</div>
-				<div>Account Information</div>
-				<div>Name: {user?.name}</div>
-				<div>Email: {user?.email}</div>
-				<Link href="/user/quotes">Your Quotes</Link>
+				<div className="font-semibold text-2xl pt-6 pb-2">
+					Account Information
+				</div>
+				<div className="text-lg">
+					<div>Name: {user?.name}</div>
+					<div>Email: {user?.email}</div>
+				</div>
+				<Link href="/user/quotes" className="font-semibold py-2">
+					Your Quotes
+				</Link>
 			</div>
 		</div>
 	);
