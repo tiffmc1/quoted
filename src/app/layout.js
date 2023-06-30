@@ -1,8 +1,8 @@
 import "./globals.css";
-import { Inter } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import { AuthContextProvider } from "./firebase/context/AuthContext";
 
-const inter = Inter({ subsets: ["latin"] });
+const montserrat = Montserrat({ subsets: ["latin"], variable: "--font-mont" });
 
 export const metadata = {
 	title: "Quoted",
@@ -11,8 +11,11 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
 	return (
-		<html lang="en">
-			<body className={inter.className}>
+		<html
+			lang="en"
+			className={`${montserrat.variable} font-mont bg-white w-full min-h-screen scroll-smooth`}
+		>
+			<body>
 				<AuthContextProvider>{children}</AuthContextProvider>
 			</body>
 		</html>
