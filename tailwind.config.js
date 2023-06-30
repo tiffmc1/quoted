@@ -9,18 +9,13 @@ module.exports = {
 	],
 	theme: {
 		extend: {
-			// fontFamily: {
-			// 	mont: ["var(--font-mont)"],
-			// },
-			// colors: {
-			// 	blue_gray: "#DAE2E7",
-			// 	blue_grotto: "#025492",
-			// 	blue_navy: "#003B73",
-			// 	blue_royal: "#0074B7",
-			// 	cognac: "#C39D99",
-			// 	gold: "#F8CF40",
-			// 	white: "#f5f5f5",
-			// },
+			fontFamily: {
+				mont: ["var(--font-mont)"],
+			},
+			colors: {
+				warm_purple: "#872275",
+				white: "#f5f5f5",
+			},
 		},
 	},
 	plugins: [],
