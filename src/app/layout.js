@@ -1,3 +1,4 @@
+import "./globals.css";
 import { Montserrat } from "next/font/google";
 import { AuthContextProvider } from "./firebase/context/AuthContext";
 
