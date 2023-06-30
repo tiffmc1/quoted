@@ -1,4 +1,5 @@
 "use client";
+import "../../app/globals.css";
 import { useRef } from "react";
 import Image from "next/image";
 import defaultProfileImg from "../../../public/images/profile-img-default.png";

@@ -1,4 +1,5 @@
 "use client";
+import "../../app/globals.css";
 import { useEffect, useState } from "react";
 import { db } from "@/src/app/firebase/config";
 import {
@@ -12,10 +13,13 @@ import Moment from "react-moment";
 import "moment-timezone";
 import Image from "next/image";
 import defaultProfileImg from "../../../public/images/profile-img-default.png";
+import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
 export default function Quotes({ user, path }) {
 	const [quotesList, setQuotesList] = useState([]);
 	const [usersList, setUsersList] = useState([]);
+	const [likes, setLikes] = useState(0);
 	Moment.globalFormat = "MM/DD/YYYY hh:mm a";
 
 	useEffect(() => {
@@ -66,6 +70,11 @@ export default function Quotes({ user, path }) {
 		getUsersList();
 	}, [path, user]);
 
+	const handleClick = () => {
+		likes === 0 ? setLikes(likes + 1) : setLikes(likes - 1);
+	};
+
+	console.log(likes);
 	return (
 		<div className="p-4">
 			{quotesList.length ? (
@@ -97,7 +106,22 @@ export default function Quotes({ user, path }) {
 									<div className="italic">&quot;{quote.quote}&quot;</div>
 									<div>Author: {quote.author}</div>
 									<Moment>{quote.created?.toDate()}</Moment>
-									<div className="text-right">{quote.likes}</div>
+									{/* <button
+										onClick={handleClick}
+										className="flex flex-row justify-end"
+									>
+										{likes ? (
+											<div>
+												<FavoriteIcon />
+												{quote.likes}
+											</div>
+										) : (
+											<div>
+												<FavoriteBorderOutlinedIcon />
+												{quote.likes}
+											</div>
+										)}
+									</button> */}
 								</div>
 							) : null
 						)
