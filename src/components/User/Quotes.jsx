@@ -15,6 +15,7 @@ import defaultProfileImg from "../../../public/images/profile-img-default.png";
 
 export default function Quotes({ user, path }) {
 	const [quotesList, setQuotesList] = useState([]);
+	const [usersList, setUsersList] = useState([]);
 	Moment.globalFormat = "MM/DD/YYYY hh:mm a";
 
 	useEffect(() => {
@@ -49,41 +50,61 @@ export default function Quotes({ user, path }) {
 				);
 			}
 		};
+
+		const getUsersList = async () => {
+			onSnapshot(query(collection(db, "users")), (snapshot) => {
+				setUsersList(
+					snapshot.docs.map((doc) => ({
+						id: doc.id,
+						...doc.data(),
+					}))
+				);
+			});
+		};
+
 		getQuotesList();
-	}, [user, path]);
+		getUsersList();
+	}, [path, user]);
+
+	console.log("quotes list", quotesList);
+	console.log("users list", usersList);
 
 	return (
 		<div className="p-4">
 			{quotesList.length ? (
 				<div className="quotesGrid">
-					{quotesList.map((quote) => (
-						<div key={quote.id} className="quotesBox">
-							<div>
-								{user?.profileImg && quote.author === user.name ? (
-									<Image
-										src={user.profileImg}
-										alt="User profile image"
-										height={100}
-										width={100}
-										className="user-image"
-									/>
-								) : (
-									<Image
-										src={defaultProfileImg}
-										alt="User profile image"
-										height={100}
-										width={100}
-										className="user-image"
-									/>
-								)}
-							</div>
+					{quotesList?.map((quote) =>
+						usersList?.map((user) =>
+							quote.uid === user.uid ? (
+								<div key={user.id} className="quotesBox">
+									<div>
+										{user.profileImg ? (
+											<Image
+												src={user.profileImg}
+												alt="User profile image"
+												height={100}
+												width={100}
+												className="user-image"
+											/>
+										) : (
+											<Image
+												src={defaultProfileImg}
+												alt="User profile image"
+												height={100}
+												width={100}
+												className="user-image"
+											/>
+										)}
+									</div>
 
-							<div className="italic">&quot;{quote.quote}&quot;</div>
-							<div>Author: {quote.author}</div>
-							<Moment>{quote.created?.toDate()}</Moment>
-							<div className="text-right">{quote.likes}</div>
-						</div>
-					))}
+									<div className="italic">&quot;{quote.quote}&quot;</div>
+									<div>Author: {quote.author}</div>
+									<Moment>{quote.created?.toDate()}</Moment>
+									<div className="text-right">{quote.likes}</div>
+								</div>
+							) : null
+						)
+					)}
 				</div>
 			) : (
 				<div className="flex items-center justify-center">
