@@ -1,4 +1,5 @@
 "use client";
+import "../../app/globals.css";
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -25,13 +26,14 @@ export default function SignUp() {
 
 	return (
 		<>
-			<form onSubmit={handleSubmit}>
+			<form onSubmit={handleSubmit} className="form-container">
 				<input
 					required
 					name="name"
 					placeholder="User/Author Name For Profile"
 					type="text"
 					onChange={(e) => setAuthorName(e.target.value)}
+					className="form-input"
 				/>
 				<input
 					required
@@ -39,6 +41,7 @@ export default function SignUp() {
 					placeholder="Email"
 					type="email"
 					onChange={(e) => setEmail(e.target.value)}
+					className="form-input"
 				/>
 				<input
 					required
@@ -46,18 +49,18 @@ export default function SignUp() {
 					placeholder="Password"
 					type="password"
 					onChange={(e) => setPassword(e.target.value)}
+					className="form-input"
 				/>
-				<button
-					type="submit"
-					className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-4"
-				>
-					Sign Up
-				</button>
+				<button>Sign Up</button>
 			</form>
 
-			<div>Already A Member?</div>
-			<div>
-				<Link href="/login">LOG IN</Link>
+			<div className="pt-4 ml-6">
+				<div>Already A Member?</div>
+				<div>
+					<Link href="/login" className="text-warm_purple font-bold">
+						LOG IN
+					</Link>
+				</div>
 			</div>
 		</>
 	);
