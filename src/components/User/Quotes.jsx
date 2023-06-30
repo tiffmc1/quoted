@@ -59,23 +59,23 @@ export default function Quotes({ user, path }) {
 					{quotesList.map((quote) => (
 						<div key={quote.id} className="quotesBox">
 							<div>
-								{/* {user ? (
-								<Image
-									src={user.profileImg}
-									alt="User profile image"
-									height={100}
-									width={100}
-                  className="border border-gray-500 rounded-full"
-								/>
-							) : ( */}
-								<Image
-									src={defaultProfileImg}
-									alt="User profile image"
-									height={100}
-									width={100}
-									className="border border-gray-500 rounded-full"
-								/>
-								{/* )} */}
+								{user?.profileImg && quote.author === user.name ? (
+									<Image
+										src={user.profileImg}
+										alt="User profile image"
+										height={100}
+										width={100}
+										className="user-image"
+									/>
+								) : (
+									<Image
+										src={defaultProfileImg}
+										alt="User profile image"
+										height={100}
+										width={100}
+										className="user-image"
+									/>
+								)}
 							</div>
 
 							<div className="italic">&quot;{quote.quote}&quot;</div>
