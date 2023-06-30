@@ -1,10 +1,15 @@
 "use client";
+import "../../../globals.css";
 import { useRef } from "react";
 import { db } from "@/src/app/firebase/config";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
+import { UserData } from "@/src/app/firebase/context/AuthContext";
+import { useRouter } from "next/navigation";
 
-export default function CreateQuote({ user }) {
+export default function CreateQuotePage() {
+	const { user } = UserData();
 	const inputRef = useRef();
+	const router = useRouter();
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
@@ -21,18 +26,19 @@ export default function CreateQuote({ user }) {
 		});
 
 		inputRef.current.value = null;
+		router.back();
 	};
 
 	return (
-		<div className="flex flex-col items-center justify-center border border-gray-500">
-			<div>Create Quote</div>
-			<form onSubmit={handleSubmit}>
+		<div>
+			<div className="font-bold text-2xl py-4 text-center">Create Quote</div>
+			<form onSubmit={handleSubmit} className="form-container">
 				<input
 					required
 					type="text"
 					placeholder="Type Your Quote Here"
 					ref={inputRef}
-					className="border border-gray-500"
+					className="form-input"
 				/>
 				<button onClick={handleSubmit}>Create</button>
 			</form>
