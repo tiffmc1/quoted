@@ -8,6 +8,7 @@ import {
 	query,
 	onSnapshot,
 	where,
+	updateDoc,
 } from "firebase/firestore";
 import Moment from "react-moment";
 import "moment-timezone";
@@ -19,7 +20,8 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 export default function Quotes({ user, path }) {
 	const [quotesList, setQuotesList] = useState([]);
 	const [usersList, setUsersList] = useState([]);
-	const [likes, setLikes] = useState(0);
+	// const [likes, setLikes] = useState(0);
+	// const [liked, setLiked] = useState(false);
 	Moment.globalFormat = "MM/DD/YYYY hh:mm a";
 
 	useEffect(() => {
@@ -70,19 +72,28 @@ export default function Quotes({ user, path }) {
 		getUsersList();
 	}, [path, user]);
 
-	const handleClick = () => {
-		likes === 0 ? setLikes(likes + 1) : setLikes(likes - 1);
-	};
+	// const handleClick = () => {
+	// 	const quoteRef = doc(db, "quotes", quote.id)
+	// 	if (liked) {
+	// 		setLikes(likes - 1);
+	// 		setLiked(false);
+	// 	} else {
+	// 		setLikes(likes + 1);
+	// 		setLiked(true);
+	// 	}
+	// };
 
-	console.log(likes);
+	// console.log(likes);
+	// console.log(quotesList);
+
 	return (
 		<div className="p-4">
 			{quotesList.length ? (
 				<div className="quotesGrid">
-					{quotesList?.map((quote) =>
+					{quotesList?.map((quote, id) =>
 						usersList?.map((user) =>
 							quote.uid === user.uid ? (
-								<div key={user.id} className="quotesBox">
+								<div key={id} className="quotesBox">
 									<div>
 										{user.profileImg ? (
 											<Image
@@ -104,7 +115,7 @@ export default function Quotes({ user, path }) {
 									</div>
 
 									<div className="italic">&quot;{quote.quote}&quot;</div>
-									<div>Author: {quote.author}</div>
+									<div>Author: {user?.name}</div>
 									<Moment>{quote.created?.toDate()}</Moment>
 									{/* <button
 										onClick={handleClick}
