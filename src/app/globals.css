@@ -9,7 +9,7 @@
 }
 
 button {
-	@apply px-10 mt-8 py-2 bg-warm_purple text-white rounded-md flex flex-row items-center justify-center hover:scale-95 font-semibold;
+	@apply px-6 mt-6 py-2 bg-warm_purple text-white rounded-md flex flex-row items-center justify-center hover:scale-95 font-semibold;
 }
 
 .quotesGrid {
@@ -31,7 +31,7 @@ button {
 }
 
 .form-input {
-	@apply w-[75%] p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600 text-black;
+	@apply w-[75%] p-2 border border-gray-300 rounded-md mb-4 focus:outline-none focus:border-gray-600 text-black;
 }
 
 .user-image {
