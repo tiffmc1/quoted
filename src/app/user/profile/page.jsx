@@ -89,7 +89,7 @@ export default function ProfilePage() {
 				<div className="font-semibold text-2xl pt-6 pb-2">
 					Account Information
 				</div>
-				<div className="w-[75%] flex flex-col items-center justify-between border border-red-500 text-xl py-2">
+				<div className="w-[75%] flex flex-col items-center justify-between border border-fuchsia-900 rounded text-xl py-2">
 					{openProfileEdit ? (
 						<EditProfile user={user} setOpenProfileEdit={setOpenProfileEdit} />
 					) : (
