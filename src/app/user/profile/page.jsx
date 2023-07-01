@@ -6,12 +6,16 @@ import { db, storage } from "@/src/app/firebase/config";
 import { doc, updateDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadString } from "firebase/storage";
 import ImageUpload from "@/src/components/User/ImageUpload";
+import Profile from "@/src/components/User/Profile";
+import EditProfile from "@/src/components/User/EditProfile";
+import EditIcon from "@mui/icons-material/Edit";
 
 export default function ProfilePage() {
 	const { user } = UserData();
 	const [selectedFile, setSelectedFile] = useState("");
 	const [isLoading, setIsLoading] = useState(false);
 	const [uploadComplete, setUploadComplete] = useState(true);
+	const [openProfileEdit, setOpenProfileEdit] = useState(false);
 	const selectFileRef = useRef(null);
 
 	useEffect(() => {
@@ -62,6 +66,10 @@ export default function ProfilePage() {
 		setUploadComplete(false);
 	};
 
+	const handleProfileOpen = () => {
+		!openProfileEdit ? setOpenProfileEdit(true) : setOpenProfileEdit(false);
+	};
+
 	return (
 		<div>
 			<div className="flex flex-col items-center justify-around">
@@ -76,15 +84,24 @@ export default function ProfilePage() {
 					{!uploadComplete && (
 						<button onClick={uploadProfileImage}>Confirm Change</button>
 					)}
-					{isLoading && <div>Uploading...</div>}
+					{isLoading && <div className="text-center">Uploading...</div>}
 				</div>
 				<div className="font-semibold text-2xl pt-6 pb-2">
 					Account Information
 				</div>
-				<div className="text-lg">
-					<div>Name: {user?.name}</div>
-					<div>Email: {user?.email}</div>
+				<div className="w-[75%] flex flex-col items-center justify-between border border-red-500 text-xl py-2">
+					{openProfileEdit ? (
+						<EditProfile user={user} setOpenProfileEdit={setOpenProfileEdit} />
+					) : (
+						<>
+							<Profile user={user} />
+							<button className="rounded-full p-2" onClick={handleProfileOpen}>
+								<EditIcon fontSize="small" />
+							</button>
+						</>
+					)}
 				</div>
+
 				<Link href="/user/quotes" className="font-semibold py-2">
 					Your Quotes
 				</Link>
