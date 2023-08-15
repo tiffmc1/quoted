@@ -22,8 +22,8 @@ export default function Home() {
 						</Link>
 					</button>
 				</div>
+				<Footer />
 			</div>
-			<Footer />
 		</>
 	);
 }

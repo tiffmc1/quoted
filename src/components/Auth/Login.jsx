@@ -27,7 +27,7 @@ export default function Login() {
 	};
 
 	return (
-		<>
+		<div className="flex flex-col items-center">
 			<form onSubmit={handleSubmit} className="form-container">
 				<input
 					required
@@ -49,7 +49,7 @@ export default function Login() {
 				<button>Log In</button>
 			</form>
 
-			<div className="pt-4 ml-6">
+			<div className="mt-5">
 				<div>New Here?</div>
 				<div>
 					<Link href="/signup" className="text-warm_purple font-bold">
@@ -57,6 +57,6 @@ export default function Login() {
 					</Link>
 				</div>
 			</div>
-		</>
+		</div>
 	);
 }

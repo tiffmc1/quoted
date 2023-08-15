@@ -25,12 +25,12 @@ export default function SignUp() {
 	};
 
 	return (
-		<>
+		<div className="flex flex-col items-center">
 			<form onSubmit={handleSubmit} className="form-container">
 				<input
 					required
 					name="name"
-					placeholder="User/Author Name For Profile"
+					placeholder="Username"
 					type="text"
 					onChange={(e) => setAuthorName(e.target.value)}
 					className="form-input"
@@ -53,8 +53,7 @@ export default function SignUp() {
 				/>
 				<button>Sign Up</button>
 			</form>
-
-			<div className="pt-4 ml-6">
+			<div className="mt-5">
 				<div>Already A Member?</div>
 				<div>
 					<Link href="/login" className="text-warm_purple font-bold">
@@ -62,6 +61,6 @@ export default function SignUp() {
 					</Link>
 				</div>
 			</div>
-		</>
+		</div>
 	);
 }
