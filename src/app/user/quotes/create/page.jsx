@@ -30,17 +30,24 @@ export default function CreateQuotePage() {
 
 	return (
 		<div>
-			<div className="font-bold text-2xl py-4 text-center">Create Quote</div>
-			<form onSubmit={handleSubmit} className="form-container">
-				<input
-					required
-					type="text"
-					placeholder="Type Your Quote Here"
-					ref={inputRef}
-					className="form-input"
-				/>
-				<button onClick={handleSubmit}>Create</button>
-			</form>
+			<div className="font-bold text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-5xl py-4 text-center">
+				Create Quote
+			</div>
+			<div className="flex flex-col items-center">
+				<form
+					onSubmit={handleSubmit}
+					className="flex flex-col items-center bg-purple-200 border border-black w-[20rem] sm:w-[25rem] md:w-[30rem] lg:w-[35rem] rounded-lg py-9"
+				>
+					<input
+						required
+						type="text"
+						placeholder="Type Your Quote Here"
+						ref={inputRef}
+						className="border border-black rounded-lg h-[200px] w-[15rem]"
+					/>
+					<button onClick={handleSubmit}>Create</button>
+				</form>
+			</div>
 		</div>
 	);
 }

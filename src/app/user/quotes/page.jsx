@@ -8,11 +8,11 @@ export default function QuotesPage() {
 	const path = usePathname();
 
 	return (
-		<>
-			<div className="text-center font-bold text-xl py-3">
-				{user?.name}&apos;s Quote History
+		<div className="flex flex-col items-center">
+			<div className="font-bold text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-5xl py-4">
+				{`${user && user.name}'s Quote History`}
 			</div>
 			<Quotes user={user} path={path} />
-		</>
+		</div>
 	);
 }

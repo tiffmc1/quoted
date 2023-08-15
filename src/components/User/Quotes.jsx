@@ -94,9 +94,13 @@ export default function Quotes({ user, path }) {
 	console.log(likes);
 
 	return (
-		<div className="p-4">
+		<div className="py-4">
 			{quotesList.length ? (
-				<div className="quotesGrid">
+				<div
+					className={
+						quotesList.length === 1 ? "grid grid-cols-1" : "quotesGrid"
+					}
+				>
 					{quotesList?.map((quote) =>
 						usersList?.map((user) =>
 							quote.uid === user.uid ? (
