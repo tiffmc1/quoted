@@ -41,8 +41,11 @@ export default function SignUp() {
 					placeholder="Email"
 					type="email"
 					onChange={(e) => setEmail(e.target.value)}
-					className="form-input"
+					className="form-input peer"
 				/>
+				<p className="invisible peer-invalid:visible text-red-600 text-sm">
+					Please provide a valid email address.
+				</p>
 				<input
 					required
 					name="password"

@@ -35,8 +35,11 @@ export default function Login() {
 					placeholder="Email"
 					type="email"
 					onChange={(e) => setEmail(e.target.value)}
-					className="form-input"
+					className="form-input peer"
 				/>
+				<p className="invisible peer-invalid:visible text-red-600 text-sm">
+					Please provide a valid email address.
+				</p>
 				<input
 					required
 					name="password"
@@ -45,7 +48,9 @@ export default function Login() {
 					onChange={(e) => setPassword(e.target.value)}
 					className="form-input"
 				/>
-				{errorMessage && <div>{errorMessage}</div>}
+				{errorMessage && (
+					<div className="text-red-600 text-sm">{errorMessage}</div>
+				)}
 				<button>Log In</button>
 			</form>
 
